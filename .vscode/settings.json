@@ -1,0 +1,6 @@
+{
+    "eslint.enable": true,
+    "typescript.validate.enable": false,
+    "javascript.validate.enable": false,
+    "flow.useNPMPackagedFlow": true
+}

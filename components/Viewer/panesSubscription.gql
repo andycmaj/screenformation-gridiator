@@ -1,0 +1,15 @@
+subscription Panes($viewerName: String!) {
+  pane(where: { node: { viewer: { name: $viewerName } } }) {
+    node {
+      id
+      rowStart
+      rowSpan
+      colStart
+      colSpan
+      content {
+        title
+        url
+      }
+    }
+  }
+}

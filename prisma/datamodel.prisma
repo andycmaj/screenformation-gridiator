@@ -1,0 +1,29 @@
+type User {
+  id: ID! @unique
+  name: String!
+  viewer: Viewer
+}
+
+type Viewer {
+  id: ID! @unique
+  name: String! @unique
+  rowCount: Int!
+  colCount: Int!
+  activePanes: [Pane!]!
+}
+
+type Pane {
+  id: ID! @unique
+  rowStart: Int!
+  rowSpan: Int!
+  colStart: Int!
+  colSpan: Int!
+  content: Content
+  viewer: Viewer!
+}
+
+type Content {
+  id: ID! @unique
+  title: String! @unique
+  url: String
+}

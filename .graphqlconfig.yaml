@@ -1,0 +1,6 @@
+projects:
+  screens:
+    schemaPath: lib/generated/prisma.graphql
+    includes: ["**/*.graphql"]
+    extensions:
+      prisma: prisma/prisma.yml

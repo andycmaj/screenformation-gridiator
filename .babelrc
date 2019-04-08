@@ -1,0 +1,34 @@
+{
+  "presets": ["@babel/preset-env", "@babel/preset-flow"],
+  "env": {
+    "development": {
+      "presets": ["next/babel"]
+    },
+    "production": {
+      "presets": ["next/babel"]
+    },
+    "test": {
+      "presets": [
+        [
+          "env",
+          {
+            "modules": "commonjs"
+          }
+        ],
+        "next/babel"
+      ]
+    }
+  },
+  "plugins": [
+    "@babel/plugin-transform-flow-strip-types",
+    [
+      "styled-components",
+      {
+        "ssr": true,
+        "displayName": true,
+        "preprocess": false
+      }
+    ],
+    "import-graphql"
+  ]
+}
