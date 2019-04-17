@@ -17,60 +17,37 @@ const paneReducer = (state, updatedPane) => {
   return state.map(pane => (pane.id === updatedPane.id ? updatedPane : pane));
 };
 
-const getInit = viewer => {
-  console.log('init', viewer);
+const getInit = viewer => (viewer ? viewer.activePanes : []);
 
-  return [];
-};
-
-const View = ({ viewer: { id, name, ...gridSize }, createNewNode }) => {
-  console.log('name', name);
-
-  const { data, loading, error: initialError } = useQuery(panesQuery, {
+const View = ({ name }) => {
+  const {
+    data: { viewer: activeViewer },
+    loading,
+  } = useQuery(panesQuery, {
     variables: {
       viewerName: name,
     },
   });
 
-  if (loading) {
-    return <div>loading...</div>;
-  }
+  const [panes, dispatch] = useReducer(paneReducer, activeViewer, getInit);
 
-  console.log('initialError', initialError);
-  console.log('initialData', data);
-
-  const { viewer: activeViewer } = data;
-
-  const [panes, dispatch] = useReducer(
-    paneReducer,
-    activeViewer,
-    viewer => viewer.activePanes
-  );
-
-  console.log('panes', panes);
-
-  const { error: updatedError, loading: updatedLoading } = useSubscription(
-    panesSubscription,
-    {
-      variables: {
-        viewerName: name,
-      },
-      onSubscriptionData: ({ client, subscriptionData: { data } }) => {
-        // Optional callback which provides you access to the new subscription
-        // data and the Apollo client. You can use methods of the client to update
-        // the Apollo cache:
-        // https://www.apollographql.com/docs/react/advanced/caching.html#direct
-        dispatch(data.pane.node);
-      },
-    }
-  );
-
-  console.log(updatedError);
+  useSubscription(panesSubscription, {
+    variables: {
+      viewerName: name,
+    },
+    onSubscriptionData: ({ client, subscriptionData: { data } }) => {
+      // Optional callback which provides you access to the new subscription
+      // data and the Apollo client. You can use methods of the client to update
+      // the Apollo cache:
+      // https://www.apollographql.com/docs/react/advanced/caching.html#direct
+      dispatch(data.pane.node);
+    },
+  });
 
   return loading ? (
     <div>loading...</div>
   ) : (
-    <Grid {...gridSize}>
+    <Grid rowCount={2} colCount={2}>
       {
         /*placeholder/add-button cells*/
         <div>foo</div>
@@ -82,15 +59,4 @@ const View = ({ viewer: { id, name, ...gridSize }, createNewNode }) => {
   );
 };
 
-const mapStateToProps = ({ viewer }) => ({
-  viewer,
-});
-
-const mapDispatchToProps = {};
-
-export default compose(
-  connect(
-    mapStateToProps,
-    mapDispatchToProps
-  )
-)(View);
+export default View;

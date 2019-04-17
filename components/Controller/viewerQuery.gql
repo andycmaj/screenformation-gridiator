@@ -1,0 +1,19 @@
+query Panes($viewerName: String!) {
+  viewer(where: { name: $viewerName }) {
+    id
+    name
+    rowCount
+    colCount
+    activePanes {
+      id
+      rowStart
+      rowSpan
+      colStart
+      colSpan
+      content {
+        title
+        url
+      }
+    }
+  }
+}

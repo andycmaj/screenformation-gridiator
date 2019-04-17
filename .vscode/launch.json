@@ -5,7 +5,9 @@
       "type": "node",
       "request": "launch",
       "name": "Next: Node",
-      "runtimeExecutable": "${workspaceRoot}/node_modules/next/dist/bin/next",
+      // "runtimeExecutable": "${workspaceRoot}/node_modules/next/dist/bin/next",
+      "runtimeExecutable": "node",
+      "runtimeArgs": ["${workspaceRoot}/server.js"],
       "port": 9229,
       "console": "integratedTerminal",
       "env": {

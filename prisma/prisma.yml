@@ -3,8 +3,8 @@ datamodel: datamodel.prisma
 
 # Specifies the language and directory for the generated Prisma client.
 generate:
-  - generator: javascript-client
-    output: ../lib/generated/prisma-client/
+  # - generator: javascript-client
+  #   output: ../lib/generated/prisma-client/
   - generator: graphql-schema
     output: ../lib/generated/
 
@@ -13,4 +13,3 @@ hooks:
   post-deploy:
     - prisma generate
 
-endpoint: https://us1.prisma.sh/andycunn/screenformation-gridiator/dev

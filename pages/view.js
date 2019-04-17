@@ -12,15 +12,19 @@ const Main = styled.main`
   right: 0;
 `;
 
-const Index = props => (
+const Index = ({ name }) => (
   <>
     <Head>
       <title>ALL THE SCREENS</title>
     </Head>
     <Main>
-      <Viewer />
+      <Viewer name={name} />
     </Main>
   </>
 );
+
+Index.getInitialProps = ({ query: { name } }) => {
+  return { name };
+};
 
 export default Index;

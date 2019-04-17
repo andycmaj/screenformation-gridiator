@@ -1,5 +1,5 @@
 {
-  "presets": ["@babel/preset-env", "@babel/preset-flow"],
+  "presets": ["@babel/preset-env"],
   "env": {
     "development": {
       "presets": ["next/babel"]
@@ -20,7 +20,6 @@
     }
   },
   "plugins": [
-    "@babel/plugin-transform-flow-strip-types",
     [
       "styled-components",
       {

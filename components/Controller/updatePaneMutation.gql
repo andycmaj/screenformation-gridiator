@@ -1,0 +1,8 @@
+mutation UpdatePane($id: String!, $data: PaneUpdateInput!) {
+  updatePane(where: { id: $id }, data: $data) {
+    rowStart
+    rowSpan
+    colStart
+    colSpan
+  }
+}
